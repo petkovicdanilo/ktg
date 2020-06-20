@@ -44,9 +44,6 @@ public class Graph {
 	}
 	
 	public Graph(int[][] adjMatrix) {
-		if(adjMatrix.length != adjMatrix[0].length) {
-//			throw new
-		}
 		
 		for(int i = 0; i < adjMatrix.length; ++i) {
 			addNode(i);
