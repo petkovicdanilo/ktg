@@ -9,4 +9,5 @@ public class Edge {
 
 	private int firstNode;
 	private int secondNode;
+	private int weight = 1;
 }
