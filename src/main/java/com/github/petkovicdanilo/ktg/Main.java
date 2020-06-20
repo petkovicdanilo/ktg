@@ -6,6 +6,7 @@ import com.github.petkovicdanilo.ktg.path.Dijkstra;
 import com.github.petkovicdanilo.ktg.path.PathNodeInfo;
 import com.github.petkovicdanilo.ktg.traversal.BreadthFirstTraversal;
 import com.github.petkovicdanilo.ktg.traversal.TraversalNodeInfo;
+import com.github.petkovicdanilo.ktg.tree.Kruskal;
 
 public class Main {
 
@@ -37,6 +38,13 @@ public class Main {
 		}
 
 		System.out.println();
+		
+		Kruskal kruskal = new Kruskal();
+		Graph mst = kruskal.getMinSpanningTree(g);
+		
+		for(Edge edge : mst.edges()) {
+			System.out.println(edge);
+		}
 	}
 
 }

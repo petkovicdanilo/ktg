@@ -1,5 +1,6 @@
 package com.github.petkovicdanilo.ktg;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -72,6 +73,18 @@ public class Graph {
 	
 	public boolean containsNode(int node) {
 		return adjList.containsKey(node);
+	}
+	
+	public List<Edge> edges() {
+		List<Edge> edges = new ArrayList<>();
+		
+		for(int node : adjList.keySet()) {
+			for(EdgeInfo edgeInfo : adjList.get(node)) {
+				edges.add(new Edge(node, edgeInfo.neighbour, edgeInfo.weight));
+			}
+		}
+		
+		return edges;
 	}
 	
 	public void addEdge(int first, int second) {

@@ -9,5 +9,9 @@ public class Edge {
 
 	private int firstNode;
 	private int secondNode;
-	private int weight = 1;
+	private int weight;
+	
+	public Edge reverse() {
+		return new Edge(secondNode, firstNode, weight);
+	}
 }
