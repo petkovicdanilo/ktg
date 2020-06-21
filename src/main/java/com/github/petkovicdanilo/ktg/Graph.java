@@ -27,6 +27,12 @@ public class Graph {
 		this(Collections.emptyList(), Collections.emptyList());
 	}
 	
+	public Graph(int V) {
+		for(int i = 0; i < V; ++i) {
+			addNode(i);
+		}
+	}
+	
 	public Graph(Iterable<Integer> nodes) {
 		this(nodes, Collections.emptyList());
 	}
@@ -56,6 +62,10 @@ public class Graph {
 				}
 			}
 		}
+	}
+	
+	public Graph(Graph g) {
+		this(g.nodes(), g.edges());
 	}
 	
 	public List<Integer> nodes() {
@@ -96,6 +106,15 @@ public class Graph {
 		addEdge(edge.getFirstNode(), edge.getSecondNode(), edge.getWeight());
 	}
 	
+	public void removeEdge(int first, int second) {
+		EdgeInfo edgeInfo = getEdgeInfo(first, second).get();
+		adjList.get(first).remove(edgeInfo);
+	}
+	
+	public void removeEdge(Edge edge) {
+		removeEdge(edge.getFirstNode(), edge.getSecondNode());
+	}
+	
 	public boolean containsEgde(Edge edge) {
 		return containsEgde(edge.getFirstNode(), edge.getSecondNode());
 	}
@@ -121,6 +140,12 @@ public class Graph {
 	
 	public void setEdgeWeight(int firstNode, int secondNode, int newWeight) {
 		getEdgeInfo(firstNode, secondNode).get().setWeight(newWeight);
+	}
+	
+	public void addEdgeWeight(int firstNode, int secondNode, int amount) {
+		EdgeInfo edgeInfo = getEdgeInfo(firstNode, secondNode).get();
+		int oldWeight = edgeInfo.getWeight();
+		edgeInfo.setWeight(oldWeight + amount);
 	}
 	
 	public int getEdgeWeight(int firstNode, int secondNode) {

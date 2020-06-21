@@ -15,9 +15,9 @@ public class TraversalNodeInfo {
 		WHITE, GRAY, BLACK
 	};
 	
-	private int node;
 	private Integer parent;
 	private Color color;
+	private int orderNumber;
 	private int distance;
 	private int level;
 }
