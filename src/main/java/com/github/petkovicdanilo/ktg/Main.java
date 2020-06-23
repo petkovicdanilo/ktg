@@ -4,6 +4,7 @@ import java.util.Map.Entry;
 
 import com.github.petkovicdanilo.ktg.flow.FordFulkerson;
 import com.github.petkovicdanilo.ktg.flow.MaxFlow;
+import com.github.petkovicdanilo.ktg.flow.PushRelabel;
 import com.github.petkovicdanilo.ktg.path.Dijkstra;
 import com.github.petkovicdanilo.ktg.path.PathNodeInfo;
 import com.github.petkovicdanilo.ktg.traversal.BreadthFirstTraversal;
@@ -17,7 +18,9 @@ public class Main {
 //		bfs();
 //		dijkstra();
 //		kruskal();
-		fordFulkerson();
+//		fordFulkerson();
+//		pushRelabel();
+//		dinitz();
 	}
 
 	private static Graph graph1() {
@@ -115,4 +118,17 @@ public class Main {
 		}
 	}
 	
+	private static void pushRelabel() {
+//		Graph g = graph2();
+		Graph g = graph3();
+		
+		PushRelabel pushRelabel = new PushRelabel();
+		MaxFlow maxFlow = pushRelabel.getMaxFlow(g, 0, 5);
+		
+		System.out.println(maxFlow.getFlow());
+		
+		for(Edge edge : maxFlow.getFlowGraph().edges()) {
+			System.out.println(edge);
+		}
+	}
 }
