@@ -1,7 +1,5 @@
 package com.github.petkovicdanilo.ktg.flow;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import com.github.petkovicdanilo.ktg.Edge;
@@ -13,28 +11,11 @@ public class FordFulkerson implements MaxFlowAlgorithm {
 
 	@Override
 	public MaxFlow getMaxFlow(Graph g, int source, int sink) {
-		Graph residual = new Graph(g.nodes());
-		Graph flowGraph = new Graph(g.nodes());
+		Graph residual = g.getResidual();
 		
-		for(int node1 : g.nodes()) {
-			for(int node2 : g.nodes()) {
-				if(node1 == node2) {
-					continue;
-				}
-					
-				if(!g.containsEgde(node1, node2) && !g.containsEgde(node2, node1)) {
-					continue;
-				}
-				
-				int weight = 0;
-				if(g.containsEgde(node1, node2)) {
-					weight = g.getEdgeWeight(node1, node2);
-					
-					flowGraph.addEdge(node1, node2, 0);
-				}
-				
-				residual.addEdge(node1, node2, weight);
-			}
+		Graph flowGraph = new Graph(g.nodes());
+		for(Edge edge : g.edges()) {
+			flowGraph.addEdge(edge.getFirstNode(), edge.getSecondNode(), 0);
 		}
 		
 		int maxFlow = 0;
@@ -75,17 +56,8 @@ public class FordFulkerson implements MaxFlowAlgorithm {
 			bfsInfo = bfs.traverse(residual, source, false);
 		}
 		
-		List<Edge> edgesToRemove = new ArrayList<>();
-		for(Edge edge : flowGraph.edges()) {
-			if(edge.getWeight() == 0) {
-				edgesToRemove.add(edge);
-			}
-		}
-		
-		for(Edge edge : edgesToRemove) {
-			flowGraph.removeEdge(edge);
-		}
-		
+		flowGraph.removeZeroEdges();
+	
 		return new MaxFlow(flowGraph, maxFlow);
 	}
 

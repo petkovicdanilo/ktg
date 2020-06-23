@@ -153,4 +153,42 @@ public class Graph {
 				.map(edgeInfo -> edgeInfo.getWeight())
 				.orElse(null);
 	}
+	
+	public Graph getResidual() {
+		Graph residual = new Graph(this.nodes());
+		
+		for(int node1 : this.nodes()) {
+			for(int node2 : this.nodes()) {
+				if(node1 == node2) {
+					continue;
+				}
+					
+				if(!this.containsEgde(node1, node2) && !this.containsEgde(node2, node1)) {
+					continue;
+				}
+				
+				int weight = 0;
+				if(this.containsEgde(node1, node2)) {
+					weight = this.getEdgeWeight(node1, node2);
+				}
+				
+				residual.addEdge(node1, node2, weight);
+			}
+		}
+		
+		return residual;
+	}
+	
+	public void removeZeroEdges() {
+		List<Edge> edgesToRemove = new ArrayList<>();
+		for(Edge edge : this.edges()) {
+			if(edge.getWeight() == 0) {
+				edgesToRemove.add(edge);
+			}
+		}
+		
+		for(Edge edge : edgesToRemove) {
+			this.removeEdge(edge);
+		}
+	}
 }
