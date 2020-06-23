@@ -2,6 +2,7 @@ package com.github.petkovicdanilo.ktg;
 
 import java.util.Map.Entry;
 
+import com.github.petkovicdanilo.ktg.flow.Dinitz;
 import com.github.petkovicdanilo.ktg.flow.FordFulkerson;
 import com.github.petkovicdanilo.ktg.flow.MaxFlow;
 import com.github.petkovicdanilo.ktg.flow.PushRelabel;
@@ -20,7 +21,7 @@ public class Main {
 //		kruskal();
 //		fordFulkerson();
 //		pushRelabel();
-//		dinitz();
+		dinitz();
 	}
 
 	private static Graph graph1() {
@@ -120,6 +121,16 @@ public class Main {
 		
 		System.out.println(maxFlow.getFlow());
 		System.out.println(maxFlow.getFlowGraph());
+	}
+	
+	private static void dinitz() {
+//		Graph g = graph2();
+		Graph g = graph3();
 		
+		Dinitz dinitz = new Dinitz();
+		MaxFlow maxFlow = dinitz.getMaxFlow(g, 0, 5);
+		
+		System.out.println(maxFlow.getFlow());
+		System.out.println(maxFlow.getFlowGraph());
 	}
 }

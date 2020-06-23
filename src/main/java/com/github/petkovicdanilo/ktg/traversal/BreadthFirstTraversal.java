@@ -23,6 +23,7 @@ public class BreadthFirstTraversal implements TraversalAlgorithm {
 					.color(Color.WHITE)
 					.orderNumber(Integer.MAX_VALUE)
 					.distance(Integer.MAX_VALUE)
+					.level(-1)
 					.build();
 
 			traversalInfo.put(node, nodeInfo);
