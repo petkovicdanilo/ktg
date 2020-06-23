@@ -97,11 +97,7 @@ public class Main {
 		Kruskal kruskal = new Kruskal();
 		Graph mst = kruskal.getMinSpanningTree(g);
 		
-		for(Edge edge : mst.edges()) {
-			System.out.println(edge);
-		}
-		
-		System.out.println();
+		System.out.println(mst);
 	}
 	
 	private static void fordFulkerson() {
@@ -112,10 +108,7 @@ public class Main {
 		MaxFlow maxFlow = fordFulkerson.getMaxFlow(g, 0, 5);
 		
 		System.out.println(maxFlow.getFlow());
-		
-		for(Edge edge : maxFlow.getFlowGraph().edges()) {
-			System.out.println(edge);
-		}
+		System.out.println(maxFlow.getFlowGraph());
 	}
 	
 	private static void pushRelabel() {
@@ -126,9 +119,7 @@ public class Main {
 		MaxFlow maxFlow = pushRelabel.getMaxFlow(g, 0, 5);
 		
 		System.out.println(maxFlow.getFlow());
+		System.out.println(maxFlow.getFlowGraph());
 		
-		for(Edge edge : maxFlow.getFlowGraph().edges()) {
-			System.out.println(edge);
-		}
 	}
 }

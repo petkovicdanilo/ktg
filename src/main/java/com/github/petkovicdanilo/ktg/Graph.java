@@ -191,4 +191,24 @@ public class Graph {
 			this.removeEdge(edge);
 		}
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Graph (\n");
+		
+		for(int node : nodes()) {
+			sb.append("\t" + node + ": ");
+			
+			for(EdgeInfo edgeInfo : adjList.get(node)) {
+				sb.append(edgeInfo.getNeighbour() + 
+						"(weight = " + edgeInfo.getWeight() + "), ");
+			}
+			
+			sb.append("\n");
+		}
+		
+		sb.append(")\n");
+		
+		return sb.toString();
+	}
 }
